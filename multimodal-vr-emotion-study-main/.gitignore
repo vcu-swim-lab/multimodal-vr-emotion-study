@@ -1,4 +1,4 @@
-﻿#mp4 files are too large
+#mp4 files are too large
 *.mp4
 #Unity gitignore
 #Unity project sub-folders
@@ -9,9 +9,6 @@
 */[Bb]uilds/
 */[Ll]ogs/
 */[Uu]ser[Ss]ettings/
-**/.cxx/
-*BurstDebugInformation_DoNotShip/
-docx_render_check/
 
 Library/*
 Temp/*
@@ -70,14 +67,6 @@ sysinfo.txt
 *.unitypackage
 *.unitypackage.meta
 *.app
-*.exe
-*.exe.meta
-
-# Unity Android CMake build cache
-.utmp/
-
-# Visual Studio solution (newer format)
-*.slnx
 
 # Crashlytics generated file
 crashlytics-build.properties
@@ -198,7 +187,7 @@ ipython_config.py
 #   Similar to Pipfile.lock, it is generally recommended to include poetry.lock in version control.
 #   This is especially recommended for binary packages to ensure reproducibility, and is more
 #   commonly ignored for libraries.
-#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file
+#   https://python-poetry.org/docs/basic-usage/#commit-your-poetrylock-file-to-version-control
 #poetry.lock
 
 # pdm
