@@ -1,4 +1,12 @@
 # Emotion Gathering Tool
+
+## Repository structure
+
+| Folder | Purpose |
+| --- | --- |
+| `multimodal-vr-emotion-study-main/` | Unity project for running the VR emotion study and collecting XR signal data. |
+| `analyzing-data/` | Python notebook workflow for loading and analyzing collected `weights.csv` files. |
+
 ## Setup the project
 
 1. Get Unity 6 from the [Unity Hub](https://unity.com/unity-hub).
