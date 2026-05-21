@@ -12,14 +12,17 @@
 1. Get Unity 6 from the [Unity Hub](https://unity.com/unity-hub).
 
 2. When picking the platforms for Unity, make sure to select "Android Build Support", along with the "Android SDK & NDK Tools and OpenJDK" sub-options selected, like shown below.
-![alt text](Docs/image.png)
+![alt text](<img width="805" height="551" alt="image" src="https://github.com/user-attachments/assets/36e3a74b-0d3c-4f8d-b354-d60518311726" />
+)
 
 3. Open the project on [Github](https://github.com/vcu-swim-lab/vr-emotion-study.git), download it (click Code > Download Zip) and unzip at your location of choice.
-![alt text](Docs/image-1.png)
+![alt text](<img width="514" height="453" alt="image" src="https://github.com/user-attachments/assets/448338fc-fcd1-4125-9867-31ead0c388ea" />
+)
 
 4. Download the videos from [here](https://drive.google.com/drive/folders/1g_4WhicdfbR_D_R83cXnmfYfW-LbMYch?usp=drive_link). Unzip the videos and place them in the [Assets/Videos](./Assets/Videos/) folder of the project.
 5. Within the Projects menu in Unity Hub, click "Add" then "Add project from disk". Navigate to your local copy of the project and click "Add project".
-![alt text](Docs/image-2.png)
+![alt text](<img width="809" height="201" alt="image" src="https://github.com/user-attachments/assets/f3b493fb-1042-4d7e-b27e-cb36b0ad9540" />
+)
 
 
 ## Setup the headset
