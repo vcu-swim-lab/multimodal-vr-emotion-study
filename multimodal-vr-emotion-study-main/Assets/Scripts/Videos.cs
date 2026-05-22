@@ -6,6 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.Video;
 using UnityEngine.UI;
 using UnityEngine.XR;
+using TMPro;
 
 
 public enum Emotion
@@ -60,6 +61,37 @@ internal class VideoList
     private int current = 0;
 }
 
+internal class EmotionList
+{
+    public EmotionList()
+    {
+        const int max = (int)Emotion.Max;
+        emotions = new Emotion[max];
+
+        for (int i = 0; i < max; ++i)
+            emotions[i] = (Emotion)i;
+
+        for (int i = max - 1; i > 0; --i)
+        {
+            var j = Random.Range(0, i);
+            (emotions[j], emotions[i]) = (emotions[i], emotions[j]);
+        }
+    }
+
+    public Emotion Next()
+    {
+        if (current == emotions.Length)
+            return Emotion.Max;
+
+        return emotions[current++];
+    }
+
+    public int Count { get => emotions.Length - current; }
+
+    private readonly Emotion[] emotions;
+    private int current = 0;
+}
+
 public class Videos : MonoBehaviour
 {
     private enum VideoDecision
@@ -71,6 +103,9 @@ public class Videos : MonoBehaviour
         Quit,
     }
 
+    private const string GoToActingButtonText = "Go to Acting Phase";
+    private const float ActingPromptDurationSeconds = 10f;
+
     //Variable to hold "Video Player" component. Assigned in start function
     private VideoPlayer videoPlayer;
     private AudioSource vrAudioSource;
@@ -78,7 +113,11 @@ public class Videos : MonoBehaviour
     [Header("UI Panels")]
     [SerializeField] private GameObject startPanel;
     [SerializeField] private GameObject betweenVideosPanel;
+    [SerializeField] private GameObject actingPromptPanel;
     [SerializeField] private GameObject finishedPanel;
+
+    [Header("Acting Prompt")]
+    [SerializeField] private TMP_Text actingPromptText;
 
     [Header("UI Buttons")]
     [SerializeField] private Button playButton;
@@ -92,13 +131,12 @@ public class Videos : MonoBehaviour
 
     private VideoDecision decision = VideoDecision.None;
     private readonly List<InputDevice> xrInputDevices = new();
+    private readonly Dictionary<Button, string> originalButtonLabels = new();
     private bool wasXrAdvancePressed;
     private bool videoHadError;
 
     // The collection of videos to play on the first part.
     private VideoList videos;
-    // The collection of videos to play on the second part.
-    private VideoList emotionsText;
 
     private void Awake()
     {
@@ -118,6 +156,9 @@ public class Videos : MonoBehaviour
         if (xrSignalLogger == null)
             xrSignalLogger = FindFirstObjectByType<XRSignalLogger>();
 
+        CacheButtonLabel(nextButton);
+        CacheButtonLabel(quitButton);
+
         RegisterButton(playButton, VideoDecision.Play);
         RegisterButton(quitButton, VideoDecision.Quit);
         RegisterButton(nextButton, VideoDecision.Next);
@@ -132,7 +173,6 @@ public class Videos : MonoBehaviour
         yield return StartCoroutine(EnsureEmotionVideosAvailable());
 
         videos = new VideoList(VIDEOS_FOLDER);
-        emotionsText = new VideoList(TEXT_VIDEOS_FOLDER);
 
         yield return StartCoroutine(AnimationCoro());
     }
@@ -156,24 +196,7 @@ public class Videos : MonoBehaviour
 
         yield return StartCoroutine(PlayVideoList(videos));
 
-        if (File.Exists(INTRO_PATH))
-        {
-            yield return StartCoroutine(PlayVideoPath(INTRO_PATH, "intro"));
-            yield return StartCoroutine(AwaitBetweenVideoDecision(INTRO_PATH, "intro"));
-        }
-        else
-        {
-            Debug.LogWarning($"[Videos] Intro video not found, skipping acting intro: {INTRO_PATH}");
-        }
-
-        if (Directory.Exists(TEXT_VIDEOS_FOLDER) && Directory.GetFiles(TEXT_VIDEOS_FOLDER, "*.mp4").Length > 0)
-        {
-            yield return StartCoroutine(PlayVideoList(emotionsText));
-        }
-        else
-        {
-            Debug.LogWarning($"[Videos] Acting prompt videos not found, skipping prompt phase: {TEXT_VIDEOS_FOLDER}");
-        }
+        yield return StartCoroutine(PlayActingPhase());
 
         videoPlayer.Stop();
         ShowOnly(finishedPanel);
@@ -193,8 +216,9 @@ public class Videos : MonoBehaviour
                 continue;
             }
 
+            bool isFinalVideo = list.Count == 0;
             yield return StartCoroutine(PlayVideoPath(videoPath, emotion.ToString()));
-            yield return StartCoroutine(AwaitBetweenVideoDecision(videoPath, emotion.ToString()));
+            yield return StartCoroutine(AwaitBetweenVideoDecision(videoPath, emotion.ToString(), isFinalVideo));
         }
     }
 
@@ -224,33 +248,78 @@ public class Videos : MonoBehaviour
         }
 
         Debug.LogError($"[Videos] Playing {label}");
-        xrSignalLogger?.BeginLogging(label);
+        xrSignalLogger?.BeginLogging(label, RecordingPhase.Video);
         yield return new WaitUntil(() => !videoPlayer.isPlaying || videoHadError);
         xrSignalLogger?.EndLogging();
         Debug.LogError($"[Videos] Finished {label}");
     }
 
-    private IEnumerator AwaitBetweenVideoDecision(string videoPath, string label)
+    private IEnumerator PlayActingPhase()
+    {
+        var actingEmotions = new EmotionList();
+        videoPlayer.Stop();
+
+        if (actingPromptPanel == null || actingPromptText == null)
+            Debug.LogWarning("[Videos] Acting prompt UI is not fully assigned. Acting recordings will still run, but the prompt may not be visible.");
+
+        while (actingEmotions.Count > 0)
+        {
+            Emotion emotion = actingEmotions.Next();
+            if (emotion == Emotion.Max)
+                yield break;
+
+            decision = VideoDecision.None;
+            wasXrAdvancePressed = IsXrAdvancePressed();
+
+            if (actingPromptText != null)
+                actingPromptText.text = emotion.ToString();
+
+            ShowOnly(actingPromptPanel);
+
+            Debug.LogError($"[Videos] Acting prompt: {emotion}");
+            xrSignalLogger?.BeginLogging(emotion.ToString(), RecordingPhase.Acting);
+
+            yield return new WaitForSeconds(ActingPromptDurationSeconds);
+
+            xrSignalLogger?.EndLogging();
+            Debug.LogError($"[Videos] Finished acting prompt: {emotion}");
+
+            yield return StartCoroutine(AwaitActingAdvanceDecision());
+        }
+
+        ShowOnly(null);
+    }
+
+    private IEnumerator AwaitBetweenVideoDecision(string videoPath, string label, bool isFinalVideo)
     {
         do
         {
             decision = VideoDecision.None;
             wasXrAdvancePressed = IsXrAdvancePressed();
+            ConfigureBetweenVideoButtons(isFinalVideo);
             ShowOnly(betweenVideosPanel);
 
             yield return new WaitUntil(() => BetweenVideoDecisionRequested());
-
-            if (decision == VideoDecision.Quit)
-            {
-                QuitApplication();
-                yield break;
-            }
 
             if (decision == VideoDecision.Replay)
                 yield return StartCoroutine(PlayVideoPath(videoPath, label));
         }
         while (decision == VideoDecision.Replay);
 
+        RestoreBetweenVideoButtons();
+        ShowOnly(null);
+    }
+
+    private IEnumerator AwaitActingAdvanceDecision()
+    {
+        decision = VideoDecision.None;
+        wasXrAdvancePressed = IsXrAdvancePressed();
+        ConfigureActingAdvanceButtons();
+        ShowOnly(betweenVideosPanel);
+
+        yield return new WaitUntil(() => ActingDecisionRequested());
+
+        RestoreBetweenVideoButtons();
         ShowOnly(null);
     }
 
@@ -276,7 +345,7 @@ public class Videos : MonoBehaviour
 
     private bool BetweenVideoDecisionRequested()
     {
-        if (decision == VideoDecision.Next || decision == VideoDecision.Replay || decision == VideoDecision.Quit)
+        if (decision == VideoDecision.Next || decision == VideoDecision.Replay)
             return true;
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || XrAdvancePressedThisFrame())
@@ -291,9 +360,17 @@ public class Videos : MonoBehaviour
             return true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        return false;
+    }
+
+    private bool ActingDecisionRequested()
+    {
+        if (decision == VideoDecision.Next)
+            return true;
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return) || XrAdvancePressedThisFrame())
         {
-            decision = VideoDecision.Quit;
+            decision = VideoDecision.Next;
             return true;
         }
 
@@ -347,10 +424,84 @@ public class Videos : MonoBehaviour
         button.onClick.AddListener(() => decision = buttonDecision);
     }
 
+    private void ConfigureBetweenVideoButtons(bool isFinalVideo)
+    {
+        SetButtonVisible(nextButton, true);
+        SetButtonVisible(replayButton, true);
+
+        if (isFinalVideo)
+            SetButtonText(nextButton, GoToActingButtonText);
+        else
+            RestoreButtonText(nextButton);
+    }
+
+    private void RestoreBetweenVideoButtons()
+    {
+        SetButtonVisible(nextButton, true);
+        SetButtonVisible(replayButton, true);
+        RestoreButtonText(nextButton);
+    }
+
+    private void ConfigureActingAdvanceButtons()
+    {
+        SetButtonVisible(nextButton, true);
+        SetButtonVisible(replayButton, false);
+        RestoreButtonText(nextButton);
+    }
+
+    private static void SetButtonVisible(Button button, bool visible)
+    {
+        if (button != null)
+            button.gameObject.SetActive(visible);
+    }
+
+    private void CacheButtonLabel(Button button)
+    {
+        if (button == null || originalButtonLabels.ContainsKey(button))
+            return;
+
+        TMP_Text tmpText = button.GetComponentInChildren<TMP_Text>(true);
+        if (tmpText != null)
+        {
+            originalButtonLabels[button] = tmpText.text;
+            return;
+        }
+
+        Text uiText = button.GetComponentInChildren<Text>(true);
+        if (uiText != null)
+            originalButtonLabels[button] = uiText.text;
+    }
+
+    private void SetButtonText(Button button, string text)
+    {
+        if (button == null)
+            return;
+
+        TMP_Text tmpText = button.GetComponentInChildren<TMP_Text>(true);
+        if (tmpText != null)
+        {
+            tmpText.text = text;
+            return;
+        }
+
+        Text uiText = button.GetComponentInChildren<Text>(true);
+        if (uiText != null)
+            uiText.text = text;
+    }
+
+    private void RestoreButtonText(Button button)
+    {
+        if (button == null || !originalButtonLabels.TryGetValue(button, out string label))
+            return;
+
+        SetButtonText(button, label);
+    }
+
     private void ShowOnly(GameObject visiblePanel)
     {
         SetPanelVisible(startPanel, visiblePanel == startPanel);
         SetPanelVisible(betweenVideosPanel, visiblePanel == betweenVideosPanel);
+        SetPanelVisible(actingPromptPanel, visiblePanel == actingPromptPanel);
         SetPanelVisible(finishedPanel, visiblePanel == finishedPanel);
     }
 
@@ -397,10 +548,6 @@ public class Videos : MonoBehaviour
     }
 
     private static string VIDEOS_FOLDER => Path.Combine(Application.persistentDataPath, "Videos", "Emotions");
-
-    private static string INTRO_PATH => Path.Combine(Application.persistentDataPath, "Videos", "Intro.mp4");
-
-    private static string TEXT_VIDEOS_FOLDER => Path.Combine(Application.persistentDataPath, "Videos", "EmotionTextVids");
 
     private static string STREAMING_EMOTION_VIDEOS_URL => $"{Application.streamingAssetsPath}/Videos/Emotions";
 }

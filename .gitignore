@@ -16,7 +16,10 @@ docx_render_check/
 Library/*
 Temp/*
 UserSettings/*
-VideoRecordings/*
+**/ActingRecordings/
+**/ActingRecordings/**
+**/VideoRecordings/
+**/VideoRecordings/**
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data

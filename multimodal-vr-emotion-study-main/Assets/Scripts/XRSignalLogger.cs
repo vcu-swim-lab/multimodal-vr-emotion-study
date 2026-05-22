@@ -5,6 +5,12 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
+public enum RecordingPhase
+{
+    Video,
+    Acting,
+}
+
 public class XRSignalLogger : MonoBehaviour
 {
     [Header("Head")]
@@ -30,7 +36,8 @@ public class XRSignalLogger : MonoBehaviour
 
     private StreamWriter csvWriter;
     private string csvPath;
-    private string sessionDirectory;
+    private string sessionTimestamp;
+    private readonly Dictionary<RecordingPhase, string> sessionDirectories = new();
     private string currentEmotion;
     private float nextCsvSampleTime;
     private bool isLogging;
@@ -46,7 +53,7 @@ public class XRSignalLogger : MonoBehaviour
         DetectUnsupportedSignals();
     }
 
-    public void BeginLogging(string label)
+    public void BeginLogging(string label, RecordingPhase phase = RecordingPhase.Video)
     {
         if (!logPositionCsv)
         {
@@ -61,10 +68,10 @@ public class XRSignalLogger : MonoBehaviour
         EndLogging();
 
         currentEmotion = SanitizePathPart(label);
-        string emotionDirectory = Path.Combine(GetSessionDirectory(), currentEmotion);
+        string emotionDirectory = Path.Combine(GetSessionDirectory(phase), currentEmotion);
         Directory.CreateDirectory(emotionDirectory);
 
-        csvPath = Path.Combine(emotionDirectory, "weights.csv");
+        csvPath = Path.Combine(emotionDirectory, GetCsvFileName(phase));
         csvWriter = new StreamWriter(csvPath, false, Encoding.UTF8);
         csvWriter.WriteLine(BuildCsvHeader());
         csvWriter.Flush();
@@ -72,7 +79,7 @@ public class XRSignalLogger : MonoBehaviour
         isLogging = true;
         nextCsvSampleTime = Time.time;
 
-        Debug.Log($"[XRSignalLogger] Started weights CSV for {currentEmotion}: {csvPath}");
+        Debug.Log($"[XRSignalLogger] Started {phase} CSV for {currentEmotion}: {csvPath}");
     }
 
     public void EndLogging()
@@ -230,7 +237,15 @@ public class XRSignalLogger : MonoBehaviour
         Vector3 rightControllerPosition = rightControllerTracked ? OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch) : Vector3.zero;
         Vector3 leftHandPosition = leftHand != null ? leftHand.transform.position : Vector3.zero;
         Vector3 rightHandPosition = rightHand != null ? rightHand.transform.position : Vector3.zero;
-        bool faceValid = faceExpressions != null && faceExpressions.ValidExpressions;
+
+        // Quest Pro specific signals
+        OVRPlugin.SystemHeadset headset = OVRPlugin.GetSystemHeadsetType();
+        bool isQuestPro =
+            headset == OVRPlugin.SystemHeadset.Meta_Quest_Pro ||
+            headset == OVRPlugin.SystemHeadset.Meta_Link_Quest_Pro;
+        bool faceValid = isQuestPro &&
+                 faceExpressions != null &&
+                 faceExpressions.ValidExpressions;
 
         var row = new List<string>
         {
@@ -275,29 +290,41 @@ public class XRSignalLogger : MonoBehaviour
         csvWriter.Flush();
     }
 
-    private string GetSessionDirectory()
+    private string GetSessionDirectory(RecordingPhase phase)
     {
-        if (!string.IsNullOrEmpty(sessionDirectory))
+        if (sessionDirectories.TryGetValue(phase, out string existingDirectory))
         {
-            return sessionDirectory;
+            return existingDirectory;
         }
 
-        string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmm", CultureInfo.InvariantCulture);
-        sessionDirectory = Path.Combine(GetRecordingsRootDirectory(), timestamp);
+        if (string.IsNullOrEmpty(sessionTimestamp))
+        {
+            sessionTimestamp = DateTime.Now.ToString("yyyyMMdd-HHmm", CultureInfo.InvariantCulture);
+        }
+
+        string sessionDirectory = Path.Combine(GetRecordingsRootDirectory(phase), sessionTimestamp);
         Directory.CreateDirectory(sessionDirectory);
+        sessionDirectories[phase] = sessionDirectory;
         return sessionDirectory;
     }
 
-    private static string GetRecordingsRootDirectory()
+    private static string GetRecordingsRootDirectory(RecordingPhase phase)
     {
+        string rootFolder = phase == RecordingPhase.Acting ? "ActingRecordings" : "VideoRecordings";
+
 #if UNITY_EDITOR || UNITY_STANDALONE_WIN
         string projectRoot = Directory.GetParent(Application.dataPath)?.FullName;
         if (!string.IsNullOrEmpty(projectRoot))
         {
-            return Path.Combine(projectRoot, "VideoRecordings");
+            return Path.Combine(projectRoot, rootFolder);
         }
 #endif
-        return Path.Combine(Application.persistentDataPath, "VideoRecordings");
+        return Path.Combine(Application.persistentDataPath, rootFolder);
+    }
+
+    private static string GetCsvFileName(RecordingPhase phase)
+    {
+        return phase == RecordingPhase.Acting ? "acting.csv" : "weights.csv";
     }
     private void CloseCsvWriter()
     {
@@ -378,16 +405,17 @@ public class XRSignalLogger : MonoBehaviour
 
     private static OVRFaceExpressions.FaceExpression[] BuildFaceExpressionColumns()
     {
-        var columns = new List<OVRFaceExpressions.FaceExpression>();
-        int first = (int)OVRFaceExpressions.FaceExpression.BrowLowererL;
-        int last = (int)OVRFaceExpressions.FaceExpression.TongueRetreat;
+        int max = (int)OVRFaceExpressions.FaceExpression.Max;
 
-        for (int i = first; i <= last; i++)
+        var columns = new OVRFaceExpressions.FaceExpression[max];
+
+
+        for (int i = 0; i < max; i++)
         {
-            columns.Add((OVRFaceExpressions.FaceExpression)i);
+            columns[i] = (OVRFaceExpressions.FaceExpression)i;
         }
 
-        return columns.ToArray();
+        return columns;
     }
 
     private static bool IsEmotionLabel(string label)
@@ -415,8 +443,5 @@ public class XRSignalLogger : MonoBehaviour
         return value ? "1" : "0";
     }
 }
-
-
-
 
 
