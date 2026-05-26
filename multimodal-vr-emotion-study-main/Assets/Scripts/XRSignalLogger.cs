@@ -5,12 +5,6 @@ using System.IO;
 using System.Text;
 using UnityEngine;
 
-public enum RecordingPhase
-{
-    Video,
-    Acting,
-}
-
 public class XRSignalLogger : MonoBehaviour
 {
     [Header("Head")]
@@ -42,6 +36,10 @@ public class XRSignalLogger : MonoBehaviour
     private float nextCsvSampleTime;
     private bool isLogging;
 
+    // Emotion Flow
+    private readonly Dictionary<RecordingPhase, int> emotionFlowCounts = new();
+
+
     public void StartDetectingSignals()
     {
         Debug.Log("=== Quest Signal Availability ===");
@@ -68,6 +66,7 @@ public class XRSignalLogger : MonoBehaviour
         EndLogging();
 
         currentEmotion = SanitizePathPart(label);
+        AppendEmotionFlow(currentEmotion, phase);
         string emotionDirectory = Path.Combine(GetSessionDirectory(phase), currentEmotion);
         Directory.CreateDirectory(emotionDirectory);
 
@@ -441,6 +440,25 @@ public class XRSignalLogger : MonoBehaviour
     private static string BoolToCsv(bool value)
     {
         return value ? "1" : "0";
+    }
+    private void AppendEmotionFlow(string emotion, RecordingPhase phase)
+    {
+        string sessionDirectory = GetSessionDirectory(phase);
+        string flowPath = Path.Combine(sessionDirectory, "emotion_flow.txt");
+
+        if (!emotionFlowCounts.ContainsKey(phase))
+        {
+            emotionFlowCounts[phase] = 0;
+        }
+
+        emotionFlowCounts[phase]++;
+
+        EmotionFlowWriter.AppendEmotionFlowEntry(
+            flowPath,
+            emotionFlowCounts[phase],
+            phase,
+            emotion,
+            DateTime.Now);
     }
 }
 

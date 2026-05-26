@@ -1,0 +1,13 @@
+{
+  "name": "XRSignalLogger.EditMode.Tests",
+  "references": ["VREmotionStudy.EmotionFlow"],
+  "includePlatforms": ["Editor"],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": true,
+  "precompiledReferences": ["nunit.framework.dll"],
+  "autoReferenced": false,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": true
+}
