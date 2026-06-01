@@ -10,3 +10,7 @@ scipy>=1.14.1
 # Plotting
 matplotlib>=3.9.2
 seaborn>=0.13.2
+
+# Dashboard
+streamlit>=1.35
+plotly>=5.22

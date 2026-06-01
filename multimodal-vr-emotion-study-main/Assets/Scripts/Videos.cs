@@ -37,7 +37,7 @@ internal class VideoList
         // shuffle the emotions for fairness
         for (int i = max - 1; i > 0; --i)
         {
-            var j = Random.Range(0, i);
+            var j = Random.Range(0, i+1);
             (emotions[j], emotions[i]) = (emotions[i], emotions[j]);
         }
     }

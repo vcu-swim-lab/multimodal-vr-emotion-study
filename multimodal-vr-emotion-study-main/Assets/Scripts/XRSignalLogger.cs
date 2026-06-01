@@ -20,7 +20,7 @@ public class XRSignalLogger : MonoBehaviour
 
     [Header("CSV Logging")]
     [SerializeField] private bool logPositionCsv = true;
-    [SerializeField, Min(0.02f)] private float csvSampleInterval = 0.1f;
+    private float csvSampleInterval = 1f / 60f; // 60 Hz
 
     private static readonly OVRFaceExpressions.FaceExpression[] FaceExpressionColumns = BuildFaceExpressionColumns();
 
@@ -94,14 +94,22 @@ public class XRSignalLogger : MonoBehaviour
         currentEmotion = null;
     }
 
+    int counter = 0;
+
     private void Update()
     {
+        print("Update\n");
+        counter++;
+
         if (!isLogging || !logPositionCsv || Time.time < nextCsvSampleTime)
         {
             return;
         }
 
-        nextCsvSampleTime = Time.time + csvSampleInterval;
+        print("Logging sample " + counter);
+        counter = 0;
+
+        nextCsvSampleTime += csvSampleInterval;
         WritePositionCsvSample();
     }
 
