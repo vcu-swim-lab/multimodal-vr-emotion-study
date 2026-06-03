@@ -7,6 +7,24 @@ from pathlib import Path
 _DEFAULT_ROOT = Path(__file__).parent.parent / "multimodal-vr-emotion-study-main"
 SIGNAL_PREFIXES = ["Head", "LeftHand", "RightHand", "LeftController", "RightController"]
 PHASE_ORDER = ["Video", "Acting"]
+HEAD_ROTATION_COLS = ["HeadPitch", "HeadYaw", "HeadRoll"]
+HEAD_QUATERNION_COLS = ["HeadRotX", "HeadRotY", "HeadRotZ", "HeadRotW"]
+EYE_GAZE_COLS = [
+    "EyeGazeTracked",
+    "EyeGazeOriginX",
+    "EyeGazeOriginY",
+    "EyeGazeOriginZ",
+    "EyeGazeDirX",
+    "EyeGazeDirY",
+    "EyeGazeDirZ",
+    "EyeGazePitch",
+    "EyeGazeYaw",
+    "EyeGazeRoll",
+    "EyeGazeRotX",
+    "EyeGazeRotY",
+    "EyeGazeRotZ",
+    "EyeGazeRotW",
+]
 
 
 def _discover_sessions(project_root: Path) -> list[str]:
@@ -95,6 +113,10 @@ def plot_line_by_phase(df: pd.DataFrame, y_col: str, title: str, y_label: str, h
     st.caption(f"Showing all {len(df):,} rows in this chart.")
 
 
+def wrap_degrees(series: pd.Series) -> pd.Series:
+    return ((series + 180) % 360) - 180
+
+
 def position_and_speed_section(dff: pd.DataFrame, prefix: str, label: str) -> None:
     axes = [f"{prefix}X", f"{prefix}Y", f"{prefix}Z"]
     speed_col = f"{prefix}Speed"
@@ -125,6 +147,44 @@ def position_and_speed_section(dff: pd.DataFrame, prefix: str, label: str) -> No
             )
             fig.update_xaxes(matches=None)
             st.plotly_chart(fig, width="stretch")
+
+
+def head_rotation_section(dff: pd.DataFrame) -> None:
+    available_rotation_cols = [col for col in HEAD_ROTATION_COLS if col in dff.columns]
+    if not available_rotation_cols:
+        st.info("No head rotation columns found. New recordings will include HeadPitch, HeadYaw, and HeadRoll.")
+        return
+
+    rotation_col = st.selectbox("Rotation axis", available_rotation_cols)
+    rotation_df = dff.copy()
+    wrapped_col = f"{rotation_col}Wrapped"
+    rotation_df[wrapped_col] = wrap_degrees(rotation_df[rotation_col])
+    plot_line_by_phase(rotation_df, wrapped_col, f"{rotation_col} over Time", "Degrees (-180 to 180)", height=360)
+
+
+def eye_gaze_section(dff: pd.DataFrame) -> None:
+    if "EyeGazeTracked" not in dff.columns:
+        st.info("No eye gaze columns found. New Quest Pro recordings can include eye gaze when eye tracking is available.")
+        return
+
+    gaze_df = dff[dff["EyeGazeTracked"] == 1]
+    if gaze_df.empty:
+        st.info("Eye gaze columns are present, but no tracked gaze samples are available for this selection.")
+        return
+
+    st.caption(f"{len(gaze_df):,} tracked eye-gaze frames out of {len(dff):,} filtered")
+    available_direction_cols = [col for col in ["EyeGazeDirX", "EyeGazeDirY", "EyeGazeDirZ"] if col in gaze_df.columns]
+    if available_direction_cols:
+        direction_col = st.selectbox("Gaze direction axis", available_direction_cols)
+        plot_line_by_phase(gaze_df, direction_col, f"{direction_col} over Time", direction_col, height=360)
+
+    available_rotation_cols = [col for col in ["EyeGazePitch", "EyeGazeYaw", "EyeGazeRoll"] if col in gaze_df.columns]
+    if available_rotation_cols:
+        rotation_col = st.selectbox("Gaze rotation axis", available_rotation_cols)
+        rotation_df = gaze_df.copy()
+        wrapped_col = f"{rotation_col}Wrapped"
+        rotation_df[wrapped_col] = wrap_degrees(rotation_df[rotation_col])
+        plot_line_by_phase(rotation_df, wrapped_col, f"{rotation_col} over Time", "Degrees (-180 to 180)", height=360)
 
 
 # Page
@@ -194,12 +254,15 @@ _non_au = (
     | {f"{p}{ax}" for p in SIGNAL_PREFIXES for ax in ["X", "Y", "Z"]}
     | {f"{p}Speed" for p in SIGNAL_PREFIXES}
     | {f"{p}Distance" for p in SIGNAL_PREFIXES}
+    | set(HEAD_ROTATION_COLS)
+    | set(HEAD_QUATERNION_COLS)
+    | set(EYE_GAZE_COLS)
 )
 AU_COLS = [c for c in df.columns if c not in _non_au]
 
 view = st.radio(
     "View",
-    ["Overview", "Face", "Head", "Hands", "Controllers", "Quality"],
+    ["Overview", "Face", "Head", "Gaze", "Hands", "Controllers", "Quality"],
     horizontal=True,
 )
 
@@ -289,6 +352,12 @@ elif view == "Face":
 elif view == "Head":
     st.subheader("Head Position & Speed")
     position_and_speed_section(dff, "Head", "Head")
+    st.subheader("Head Rotation")
+    head_rotation_section(dff)
+
+elif view == "Gaze":
+    st.subheader("Eye Gaze")
+    eye_gaze_section(dff)
 
 elif view == "Hands":
     st.subheader("Hand Position & Speed")
@@ -313,6 +382,7 @@ elif view == "Controllers":
 elif view == "Quality":
     st.subheader("Recording Quality - Tracking Rates")
     tracked_cols = [c for c in [f"{p}Tracked" for p in SIGNAL_PREFIXES] if c in dff.columns]
+    tracked_cols += [c for c in ["EyeGazeTracked"] if c in dff.columns]
     agg_cols = tracked_cols + (["FaceValid"] if "FaceValid" in dff.columns else [])
 
     if not agg_cols:
