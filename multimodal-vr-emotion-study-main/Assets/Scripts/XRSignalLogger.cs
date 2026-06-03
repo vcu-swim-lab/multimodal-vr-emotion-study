@@ -1,10 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Text;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class XRSignalLogger : MonoBehaviour
 {
@@ -24,8 +22,6 @@ public class XRSignalLogger : MonoBehaviour
     [SerializeField] private bool logPositionCsv = true;
     private float csvSampleInterval = 1f / 60f; // 60 Hz
 
-    private static readonly OVRFaceExpressions.FaceExpression[] FaceExpressionColumns = BuildFaceExpressionColumns();
-
     private Vector3 lastHeadPosition;
     private Quaternion lastHeadRotation;
     private bool hasPreviousHeadSample;
@@ -34,14 +30,12 @@ public class XRSignalLogger : MonoBehaviour
     private string csvPath;
     private string sessionTimestamp;
     private readonly Dictionary<RecordingPhase, string> sessionDirectories = new();
-    private OVRPlugin.EyeGazesState eyeGazesState;
     private string currentEmotion;
     private float nextCsvSampleTime;
     private bool isLogging;
-
-    // Emotion Flow
+    private readonly List<string> csvRow = new(128);
+    private readonly XRSignalEyeGazeSampler eyeGazeSampler = new();
     private readonly Dictionary<RecordingPhase, int> emotionFlowCounts = new();
-
 
     public void StartDetectingSignals()
     {
@@ -51,7 +45,7 @@ public class XRSignalLogger : MonoBehaviour
         DetectHandSignals();
         DetectControllerSignals();
         DetectFaceSignals();
-        DetectUnsupportedSignals();
+        DetectEyeGazeSignals();
     }
 
     public void BeginLogging(string label, RecordingPhase phase = RecordingPhase.Video)
@@ -68,14 +62,14 @@ public class XRSignalLogger : MonoBehaviour
 
         EndLogging();
 
-        currentEmotion = SanitizePathPart(label);
+        currentEmotion = XRSignalPaths.SanitizePathPart(label);
         AppendEmotionFlow(currentEmotion, phase);
         string emotionDirectory = Path.Combine(GetSessionDirectory(phase), currentEmotion);
         Directory.CreateDirectory(emotionDirectory);
 
-        csvPath = Path.Combine(emotionDirectory, GetCsvFileName(phase));
+        csvPath = Path.Combine(emotionDirectory, XRSignalPaths.GetCsvFileName(phase));
         csvWriter = new StreamWriter(csvPath, false, Encoding.UTF8);
-        csvWriter.WriteLine(BuildCsvHeader());
+        csvWriter.WriteLine(XRSignalCsvFormatter.BuildCsvHeader());
         csvWriter.Flush();
 
         isLogging = true;
@@ -97,20 +91,12 @@ public class XRSignalLogger : MonoBehaviour
         currentEmotion = null;
     }
 
-    int counter = 0;
-
     private void Update()
     {
-        print("Update\n");
-        counter++;
-
         if (!isLogging || !logPositionCsv || Time.time < nextCsvSampleTime)
         {
             return;
         }
-
-        print("Logging sample " + counter);
-        counter = 0;
 
         nextCsvSampleTime += csvSampleInterval;
         WritePositionCsvSample();
@@ -124,6 +110,61 @@ public class XRSignalLogger : MonoBehaviour
     private void OnDestroy()
     {
         EndLogging();
+    }
+
+    private void WritePositionCsvSample()
+    {
+        if (csvWriter == null || string.IsNullOrEmpty(currentEmotion))
+        {
+            return;
+        }
+
+        Transform head = GetHeadTransform();
+        Vector3 headPosition = head != null ? head.position : Vector3.zero;
+        Quaternion headRotation = head != null ? head.rotation : Quaternion.identity;
+        Vector3 headEuler = headRotation.eulerAngles;
+        bool eyeGazeTracked = eyeGazeSampler.TryGetEyeGazeSample(
+            eyeGazeTransform,
+            headPosition,
+            out Vector3 eyeGazeOrigin,
+            out Vector3 eyeGazeDirection,
+            out Quaternion eyeGazeRotation);
+        Vector3 eyeGazeEuler = eyeGazeRotation.eulerAngles;
+
+        bool leftControllerTracked = IsRealTouchControllerTracked(OVRInput.Controller.LTouch);
+        bool rightControllerTracked = IsRealTouchControllerTracked(OVRInput.Controller.RTouch);
+        Vector3 leftControllerPosition = leftControllerTracked ? OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch) : Vector3.zero;
+        Vector3 rightControllerPosition = rightControllerTracked ? OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch) : Vector3.zero;
+        Vector3 leftHandPosition = leftHand != null ? leftHand.transform.position : Vector3.zero;
+        Vector3 rightHandPosition = rightHand != null ? rightHand.transform.position : Vector3.zero;
+
+        OVRPlugin.SystemHeadset headset = OVRPlugin.GetSystemHeadsetType();
+        bool isQuestPro =
+            headset == OVRPlugin.SystemHeadset.Meta_Quest_Pro ||
+            headset == OVRPlugin.SystemHeadset.Meta_Link_Quest_Pro;
+        bool faceValid = isQuestPro &&
+            faceExpressions != null &&
+            faceExpressions.ValidExpressions;
+
+        csvRow.Clear();
+        csvRow.Add(XRSignalCsvFormatter.FormatFloat(Time.time));
+        csvRow.Add(XRSignalCsvFormatter.FormatFloat(Time.realtimeSinceStartup));
+        csvRow.Add(currentEmotion);
+        csvRow.Add(XRSignalCsvFormatter.BoolToCsv(head != null));
+        XRSignalCsvFormatter.AddVector3Fields(csvRow, headPosition);
+        XRSignalCsvFormatter.AddEulerAndQuaternionFields(csvRow, headEuler, headRotation);
+        XRSignalCsvFormatter.AddEyeGazeFields(csvRow, eyeGazeTracked, eyeGazeOrigin, eyeGazeDirection, eyeGazeEuler, eyeGazeRotation);
+        XRSignalCsvFormatter.AddHandFields(
+            csvRow,
+            leftHand != null && leftHand.IsTracked,
+            leftHandPosition,
+            rightHand != null && rightHand.IsTracked,
+            rightHandPosition);
+        XRSignalCsvFormatter.AddControllerFields(csvRow, leftControllerTracked, leftControllerPosition, rightControllerTracked, rightControllerPosition);
+        csvRow.Add(XRSignalCsvFormatter.BoolToCsv(faceValid));
+        XRSignalCsvFormatter.AddFaceExpressionFields(csvRow, faceExpressions, faceValid);
+
+        csvWriter.WriteLine(string.Join(",", csvRow));
     }
 
     private void DetectHeadSignals()
@@ -146,9 +187,7 @@ public class XRSignalLogger : MonoBehaviour
         if (hasPreviousHeadSample)
         {
             float dt = Mathf.Max(Time.deltaTime, Mathf.Epsilon);
-
             Vector3 headVelocity = (position - lastHeadPosition) / dt;
-
             float angle = Quaternion.Angle(lastHeadRotation, rotation);
             float headAngularVelocity = angle / dt;
 
@@ -199,19 +238,14 @@ public class XRSignalLogger : MonoBehaviour
         Debug.Log("Controller Tracking:");
         Debug.Log($"controllers_connected: {connected}");
         Debug.Log($"active_controller: {active}");
-
         Debug.Log($"left_controller_position: {OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch)}");
         Debug.Log($"right_controller_position: {OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch)}");
-
         Debug.Log($"left_controller_rotation: {OVRInput.GetLocalControllerRotation(OVRInput.Controller.LTouch).eulerAngles}");
         Debug.Log($"right_controller_rotation: {OVRInput.GetLocalControllerRotation(OVRInput.Controller.RTouch).eulerAngles}");
-
         Debug.Log($"left_index_trigger: {OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch)}");
         Debug.Log($"right_index_trigger: {OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch)}");
-
         Debug.Log($"left_grip: {OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.LTouch)}");
         Debug.Log($"right_grip: {OVRInput.Get(OVRInput.Axis1D.PrimaryHandTrigger, OVRInput.Controller.RTouch)}");
-
         Debug.Log($"left_thumbstick: {OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.LTouch)}");
         Debug.Log($"right_thumbstick: {OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick, OVRInput.Controller.RTouch)}");
     }
@@ -227,7 +261,7 @@ public class XRSignalLogger : MonoBehaviour
         Debug.Log($"Face tracking: assigned={faceExpressions != null} | enabled={faceExpressions.FaceTrackingEnabled} | valid={faceExpressions.ValidExpressions}");
     }
 
-    private void DetectUnsupportedSignals()
+    private void DetectEyeGazeSignals()
     {
         if (eyeGazeTransform == null)
         {
@@ -238,247 +272,11 @@ public class XRSignalLogger : MonoBehaviour
         Debug.Log($"eye_gaze: AVAILABLE | position={eyeGazeTransform.position} | rotation={eyeGazeTransform.rotation.eulerAngles}");
     }
 
-    private void WritePositionCsvSample()
-    {
-        if (csvWriter == null || string.IsNullOrEmpty(currentEmotion))
-        {
-            return;
-        }
-
-        Transform head = GetHeadTransform();
-        Vector3 headPosition = head != null ? head.position : Vector3.zero;
-        Quaternion headRotation = head != null ? head.rotation : Quaternion.identity;
-        Vector3 headEuler = headRotation.eulerAngles;
-        bool eyeGazeTracked = TryGetEyeGazeSample(headPosition, out Vector3 eyeGazeOrigin, out Vector3 eyeGazeDirection, out Quaternion eyeGazeRotation);
-        Vector3 eyeGazeEuler = eyeGazeRotation.eulerAngles;
-        bool leftControllerTracked = IsRealTouchControllerTracked(OVRInput.Controller.LTouch);
-        bool rightControllerTracked = IsRealTouchControllerTracked(OVRInput.Controller.RTouch);
-        Vector3 leftControllerPosition = leftControllerTracked ? OVRInput.GetLocalControllerPosition(OVRInput.Controller.LTouch) : Vector3.zero;
-        Vector3 rightControllerPosition = rightControllerTracked ? OVRInput.GetLocalControllerPosition(OVRInput.Controller.RTouch) : Vector3.zero;
-        Vector3 leftHandPosition = leftHand != null ? leftHand.transform.position : Vector3.zero;
-        Vector3 rightHandPosition = rightHand != null ? rightHand.transform.position : Vector3.zero;
-
-        // Quest Pro specific signals
-        OVRPlugin.SystemHeadset headset = OVRPlugin.GetSystemHeadsetType();
-        bool isQuestPro =
-            headset == OVRPlugin.SystemHeadset.Meta_Quest_Pro ||
-            headset == OVRPlugin.SystemHeadset.Meta_Link_Quest_Pro;
-        bool faceValid = isQuestPro &&
-                 faceExpressions != null &&
-                 faceExpressions.ValidExpressions;
-
-        var row = new List<string>
-        {
-            FormatFloat(Time.time),
-            FormatFloat(Time.realtimeSinceStartup),
-            currentEmotion,
-            BoolToCsv(head != null),
-            FormatFloat(headPosition.x),
-            FormatFloat(headPosition.y),
-            FormatFloat(headPosition.z),
-            FormatFloat(headEuler.x),
-            FormatFloat(headEuler.y),
-            FormatFloat(headEuler.z),
-            FormatFloat(headRotation.x),
-            FormatFloat(headRotation.y),
-            FormatFloat(headRotation.z),
-            FormatFloat(headRotation.w),
-            BoolToCsv(eyeGazeTracked),
-            FormatFloat(eyeGazeOrigin.x),
-            FormatFloat(eyeGazeOrigin.y),
-            FormatFloat(eyeGazeOrigin.z),
-            FormatFloat(eyeGazeDirection.x),
-            FormatFloat(eyeGazeDirection.y),
-            FormatFloat(eyeGazeDirection.z),
-            FormatFloat(eyeGazeEuler.x),
-            FormatFloat(eyeGazeEuler.y),
-            FormatFloat(eyeGazeEuler.z),
-            FormatFloat(eyeGazeRotation.x),
-            FormatFloat(eyeGazeRotation.y),
-            FormatFloat(eyeGazeRotation.z),
-            FormatFloat(eyeGazeRotation.w),
-            BoolToCsv(leftHand != null && leftHand.IsTracked),
-            FormatFloat(leftHandPosition.x),
-            FormatFloat(leftHandPosition.y),
-            FormatFloat(leftHandPosition.z),
-            BoolToCsv(rightHand != null && rightHand.IsTracked),
-            FormatFloat(rightHandPosition.x),
-            FormatFloat(rightHandPosition.y),
-            FormatFloat(rightHandPosition.z),
-            BoolToCsv(leftControllerTracked),
-            FormatFloat(leftControllerPosition.x),
-            FormatFloat(leftControllerPosition.y),
-            FormatFloat(leftControllerPosition.z),
-            BoolToCsv(rightControllerTracked),
-            FormatFloat(rightControllerPosition.x),
-            FormatFloat(rightControllerPosition.y),
-            FormatFloat(rightControllerPosition.z),
-            BoolToCsv(faceValid)
-        };
-
-        foreach (OVRFaceExpressions.FaceExpression expression in FaceExpressionColumns)
-        {
-            float weight = 0f;
-            if (faceValid)
-            {
-                faceExpressions.TryGetFaceExpressionWeight(expression, out weight);
-            }
-
-            row.Add(FormatFloat(weight));
-        }
-
-        csvWriter.WriteLine(string.Join(",", row));
-        csvWriter.Flush();
-    }
-
-    private bool TryGetEyeGazeSample(Vector3 fallbackOrigin, out Vector3 origin, out Vector3 direction, out Quaternion rotation)
-    {
-        if (eyeGazeTransform != null)
-        {
-            origin = eyeGazeTransform.position;
-            direction = eyeGazeTransform.forward;
-            rotation = eyeGazeTransform.rotation;
-            return true;
-        }
-
-        if (TryGetMetaEyeGazeSample(fallbackOrigin, out origin, out direction, out rotation))
-        {
-            return true;
-        }
-
-        var eyeTrackingDevices = new List<InputDevice>();
-        InputDevices.GetDevicesWithCharacteristics(InputDeviceCharacteristics.EyeTracking, eyeTrackingDevices);
-        foreach (InputDevice device in eyeTrackingDevices)
-        {
-            if (!device.TryGetFeatureValue(CommonUsages.eyesData, out Eyes eyes))
-            {
-                continue;
-            }
-
-            origin = fallbackOrigin;
-            if (eyes.TryGetLeftEyePosition(out Vector3 leftEyePosition) &&
-                eyes.TryGetRightEyePosition(out Vector3 rightEyePosition))
-            {
-                origin = (leftEyePosition + rightEyePosition) * 0.5f;
-            }
-
-            if (eyes.TryGetFixationPoint(out Vector3 fixationPoint))
-            {
-                Vector3 fixationDirection = fixationPoint - origin;
-                if (fixationDirection.sqrMagnitude > Mathf.Epsilon)
-                {
-                    direction = fixationDirection.normalized;
-                    rotation = Quaternion.LookRotation(direction);
-                    return true;
-                }
-            }
-
-            if (eyes.TryGetLeftEyeRotation(out Quaternion leftEyeRotation) &&
-                eyes.TryGetRightEyeRotation(out Quaternion rightEyeRotation))
-            {
-                rotation = Quaternion.Slerp(leftEyeRotation, rightEyeRotation, 0.5f);
-                direction = rotation * Vector3.forward;
-                return true;
-            }
-        }
-
-        origin = Vector3.zero;
-        direction = Vector3.zero;
-        rotation = Quaternion.identity;
-        return false;
-    }
-
-    private bool TryGetMetaEyeGazeSample(Vector3 fallbackOrigin, out Vector3 origin, out Vector3 direction, out Quaternion rotation)
-    {
-        origin = Vector3.zero;
-        direction = Vector3.zero;
-        rotation = Quaternion.identity;
-
-        if (!OVRPlugin.eyeTrackingSupported)
-        {
-            return false;
-        }
-
-        if (!OVRPlugin.eyeTrackingEnabled && !OVRPlugin.StartEyeTracking())
-        {
-            return false;
-        }
-
-        if (!OVRPlugin.GetEyeGazesState(OVRPlugin.Step.Render, -1, ref eyeGazesState) ||
-            eyeGazesState.EyeGazes == null ||
-            eyeGazesState.EyeGazes.Length < (int)OVRPlugin.Eye.Count)
-        {
-            return false;
-        }
-
-        OVRPlugin.EyeGazeState leftEye = eyeGazesState.EyeGazes[(int)OVRPlugin.Eye.Left];
-        OVRPlugin.EyeGazeState rightEye = eyeGazesState.EyeGazes[(int)OVRPlugin.Eye.Right];
-
-        if (!leftEye.IsValid && !rightEye.IsValid)
-        {
-            return false;
-        }
-
-        if (leftEye.IsValid && rightEye.IsValid)
-        {
-            OVRPose leftPose = leftEye.Pose.ToOVRPose().ToWorldSpacePose(Camera.main);
-            OVRPose rightPose = rightEye.Pose.ToOVRPose().ToWorldSpacePose(Camera.main);
-            origin = (leftPose.position + rightPose.position) * 0.5f;
-            rotation = Quaternion.Slerp(leftPose.orientation, rightPose.orientation, 0.5f);
-        }
-        else
-        {
-            OVRPlugin.EyeGazeState validEye = leftEye.IsValid ? leftEye : rightEye;
-            OVRPose pose = validEye.Pose.ToOVRPose().ToWorldSpacePose(Camera.main);
-            origin = pose.position;
-            rotation = pose.orientation;
-        }
-
-        if (origin == Vector3.zero)
-        {
-            origin = fallbackOrigin;
-        }
-
-        direction = rotation * Vector3.forward;
-        return true;
-    }
-
     private string GetSessionDirectory(RecordingPhase phase)
     {
-        if (sessionDirectories.TryGetValue(phase, out string existingDirectory))
-        {
-            return existingDirectory;
-        }
-
-        if (string.IsNullOrEmpty(sessionTimestamp))
-        {
-            sessionTimestamp = DateTime.Now.ToString("yyyyMMdd-HHmm", CultureInfo.InvariantCulture);
-        }
-
-        string sessionDirectory = Path.Combine(GetRecordingsRootDirectory(phase), sessionTimestamp);
-        Directory.CreateDirectory(sessionDirectory);
-        sessionDirectories[phase] = sessionDirectory;
-        return sessionDirectory;
+        return XRSignalPaths.GetSessionDirectory(phase, sessionDirectories, ref sessionTimestamp);
     }
 
-    private static string GetRecordingsRootDirectory(RecordingPhase phase)
-    {
-        string rootFolder = phase == RecordingPhase.Acting ? "ActingRecordings" : "VideoRecordings";
-
-#if UNITY_EDITOR || UNITY_STANDALONE_WIN
-        string projectRoot = Directory.GetParent(Application.dataPath)?.FullName;
-        if (!string.IsNullOrEmpty(projectRoot))
-        {
-            return Path.Combine(projectRoot, rootFolder);
-        }
-#endif
-        return Path.Combine(Application.persistentDataPath, rootFolder);
-    }
-
-    private static string GetCsvFileName(RecordingPhase phase)
-    {
-        return phase == RecordingPhase.Acting ? "acting.csv" : "weights.csv";
-    }
     private void CloseCsvWriter()
     {
         if (csvWriter == null)
@@ -486,7 +284,7 @@ public class XRSignalLogger : MonoBehaviour
             return;
         }
 
-        Debug.Log($"[XRSignalLogger] Closed weights CSV: {csvPath}");
+        Debug.Log($"[XRSignalLogger] Closed CSV: {csvPath}");
         csvWriter.Flush();
         csvWriter.Close();
         csvWriter = null;
@@ -518,104 +316,11 @@ public class XRSignalLogger : MonoBehaviour
         return (value & flag) == flag;
     }
 
-    private static string BuildCsvHeader()
-    {
-        var header = new List<string>
-        {
-            "Timestamp",
-            "RealtimeSeconds",
-            "Emotion",
-            "HeadTracked",
-            "HeadX",
-            "HeadY",
-            "HeadZ",
-            "HeadPitch",
-            "HeadYaw",
-            "HeadRoll",
-            "HeadRotX",
-            "HeadRotY",
-            "HeadRotZ",
-            "HeadRotW",
-            "EyeGazeTracked",
-            "EyeGazeOriginX",
-            "EyeGazeOriginY",
-            "EyeGazeOriginZ",
-            "EyeGazeDirX",
-            "EyeGazeDirY",
-            "EyeGazeDirZ",
-            "EyeGazePitch",
-            "EyeGazeYaw",
-            "EyeGazeRoll",
-            "EyeGazeRotX",
-            "EyeGazeRotY",
-            "EyeGazeRotZ",
-            "EyeGazeRotW",
-            "LeftHandTracked",
-            "LeftHandX",
-            "LeftHandY",
-            "LeftHandZ",
-            "RightHandTracked",
-            "RightHandX",
-            "RightHandY",
-            "RightHandZ",
-            "LeftControllerTracked",
-            "LeftControllerX",
-            "LeftControllerY",
-            "LeftControllerZ",
-            "RightControllerTracked",
-            "RightControllerX",
-            "RightControllerY",
-            "RightControllerZ",
-            "FaceValid"
-        };
-
-        foreach (OVRFaceExpressions.FaceExpression expression in FaceExpressionColumns)
-        {
-            header.Add(expression.ToString());
-        }
-
-        return string.Join(",", header);
-    }
-
-    private static OVRFaceExpressions.FaceExpression[] BuildFaceExpressionColumns()
-    {
-        int max = (int)OVRFaceExpressions.FaceExpression.Max;
-
-        var columns = new OVRFaceExpressions.FaceExpression[max];
-
-
-        for (int i = 0; i < max; i++)
-        {
-            columns[i] = (OVRFaceExpressions.FaceExpression)i;
-        }
-
-        return columns;
-    }
-
     private static bool IsEmotionLabel(string label)
     {
         return Enum.TryParse(label, out Emotion emotion) && emotion != Emotion.Max;
     }
 
-    private static string SanitizePathPart(string value)
-    {
-        foreach (char invalidChar in Path.GetInvalidFileNameChars())
-        {
-            value = value.Replace(invalidChar, '_');
-        }
-
-        return value;
-    }
-
-    private static string FormatFloat(float value)
-    {
-        return value.ToString("G9", CultureInfo.InvariantCulture);
-    }
-
-    private static string BoolToCsv(bool value)
-    {
-        return value ? "1" : "0";
-    }
     private void AppendEmotionFlow(string emotion, RecordingPhase phase)
     {
         string sessionDirectory = GetSessionDirectory(phase);
@@ -636,5 +341,3 @@ public class XRSignalLogger : MonoBehaviour
             DateTime.Now);
     }
 }
-
-
