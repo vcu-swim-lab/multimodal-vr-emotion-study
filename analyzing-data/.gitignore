@@ -12,3 +12,5 @@ build/
 .DS_Store
 analysis_output/
 *.log
+FormResponses/*
+!FormResponses/.gitkeep

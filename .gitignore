@@ -268,3 +268,5 @@ cython_debug/
 /ser/PseudoLabeling/labels
 *.ckpt
 *.tar*
+
+multimodal-vr-emotion-study-main/FormResponses/*
