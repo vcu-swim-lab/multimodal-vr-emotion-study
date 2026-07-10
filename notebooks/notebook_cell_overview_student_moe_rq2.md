@@ -1,0 +1,357 @@
+# Notebook Cell Overview
+
+Source notebook: `student_MoE_eye_head_hand_10participants_and_rq2_distillation (31).ipynb`
+Annotated notebook: `final_student_moe_rq2_distillation_and_confound_checks_10participants_annotated.ipynb`
+
+This guide lists every original cell and the role it plays in the workflow.
+
+
+## Part 1: Setup and Shared Configuration
+
+- **Cell 001 (Markdown):** ## Student Model and RQ2
+- **Cell 002 (Code):** Mount Google Drive - Connects Colab to Google Drive so the dataset, saved models, and outputs are accessible.
+- **Cell 003 (Markdown):** ## 1. Imports
+- **Cell 004 (Code):** Import deep-learning libraries and model utilities - Loads the libraries used by the following cells.
+- **Cell 005 (Markdown):** ## 2. Paths
+- **Cell 006 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 007 (Code):** Local output path for this section only — does not affect earlier sections - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 008 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 009 (Markdown):** ## 3. Labels
+- **Cell 010 (Code):** Import required libraries - Loads the libraries used by the following cells.
+- **Cell 011 (Code):** Define emotion labels and encoder - Creates the emotion class order used consistently for labels, predictions, and reports.
+- **Cell 012 (Markdown):** ## 4. Student Feature Columns
+- **Cell 013 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 014 (Markdown):** ## With Upper Face AUs
+- **Cell 015 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 016 (Markdown):** # Student-signal threshold windowing
+- **Cell 017 (Code):** Use continuous eye/head/hand signals for threshold selection - Controls whether low-signal student windows are filtered before training.
+- **Cell 018 (Code):** Configure student-signal thresholding - Controls whether low-signal student windows are filtered before training.
+
+## Part 2: Dataset Construction and Windowing
+
+- **Cell 019 (Markdown):** ## 5. Collect CSV Files
+- **Cell 020 (Markdown):** ## Together Training
+- **Cell 021 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 022 (Markdown):** ## For Seperate Training
+- **Cell 023 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 024 (Markdown):** ## 6. Parse Participant, Emotion, Domain
+- **Cell 025 (Markdown):** ## Together Training
+- **Cell 026 (Code):** Define parser helper `parse_recording_file` - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 027 (Markdown):** ## For Seperate Training
+- **Cell 028 (Code):** Define parser helper `parse_recording_file` - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 029 (Markdown):** ## 7. Participant-Exclusive Split
+- **Cell 030 (Markdown):** ## Together Training
+- **Cell 031 (Code):** Create participant-exclusive splits - Keeps participant identities separated across train, validation, and test sets.
+- **Cell 032 (Code):** 7. Participant-Exclusive Split (9 train, 1 test) - Keeps participant identities separated across train, validation, and test sets.
+- **Cell 033 (Markdown):** ## For Seperate Training
+- **Cell 034 (Code):** Create participant-exclusive splits - Keeps participant identities separated across train, validation, and test sets.
+- **Cell 035 (Markdown):** ## 8. Downsample 60 FPS to 10 Hz
+- **Cell 036 (Code):** Define downsampling helper - Converts high-frame-rate recordings into the lower-rate sequence format used by the models.
+- **Cell 037 (Code):** Define downsampling helper - Converts high-frame-rate recordings into the lower-rate sequence format used by the models.
+- **Cell 038 (Code):** Define helper `compute_train_normalization_stats` - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 039 (Code):** Prepare `STUDENT_NORM_STATS` - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 040 (Code):** Look at each participant's raw (not yet normalized) mean/max on Train - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 041 (Markdown):** #9. Make Non-Overlapping Windows --- This section does not create student windows directly. It defines the teacher-st...
+- **Cell 042 (Code):** Import required libraries - Loads the libraries used by the following cells.
+- **Cell 043 (Markdown):** ## Together Training
+- **Cell 044 (Code):** Prepare `WINDOW_STRIDE` - Creates fixed-length temporal examples from each recording.
+- **Cell 045 (Code):** Configure student-signal thresholding - Controls whether low-signal student windows are filtered before training.
+- **Cell 046 (Markdown):** ## For Seperate Training
+- **Cell 047 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 048 (Markdown):** #10. Load Split Data --- This section loads each recording and creates teacher-matched student windows. For every CSV...
+- **Cell 049 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 050 (Code):** Run part 2 code - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 051 (Markdown):** Important: the student model does not use AU features as input. AU_NAMES is only needed to choose the same window sta...
+- **Cell 052 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 053 (Markdown):** ## No Hand
+- **Cell 054 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 055 (Markdown):** ## eye+head+upper face au
+- **Cell 056 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 057 (Markdown):** -------------------------------------------
+- **Cell 058 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 059 (Markdown):** ## 11. Create Train/Validation/Test Arrays
+- **Cell 060 (Markdown):** ## For Seperate Training
+- **Cell 061 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 062 (Markdown):** ## Debug
+- **Cell 063 (Code):** Define helper `find_missing_student_columns` - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 064 (Code):** print("X_hand_train:", X_hand_train.shape) - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 065 (Code):** print("X_hand_train:", X_hand_train.shape) - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 066 (Markdown):** ## eye+head+upper face au
+- **Cell 067 (Code):** print("X_hand_train:", X_hand_train.shape) - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 068 (Markdown):** # Run PCA
+- **Cell 069 (Code):** Average each 5-frame window into one value per signal - Creates fixed-length temporal examples from each recording.
+- **Cell 070 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 071 (Code):** Prepare `pca_summary` - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 072 (Code):** Prepare `emotion_names` - Runs a supporting step for part 2: dataset construction and windowing.
+- **Cell 073 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 074 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 075 (Code):** Import required libraries - Loads the libraries used by the following cells.
+
+## Part 3: Student MoE Baseline
+
+- **Cell 076 (Markdown):** ## Student-thresholded window selection
+- **Cell 077 (Markdown):** ## Common Things
+- **Cell 078 (Code):** print("X_hand_train:", X_hand_train.shape) - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 079 (Code):** Configure student-signal thresholding - Controls whether low-signal student windows are filtered before training.
+- **Cell 080 (Markdown):** Run until here for RQ2
+- **Cell 081 (Markdown):** ## Together Training
+- **Cell 082 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 083 (Markdown):** ## No Hand
+- **Cell 084 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 085 (Markdown):** ## eye+head+upper face au
+- **Cell 086 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 087 (Markdown):** ## Seperate Training
+- **Cell 088 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 089 (Markdown):** ## 12. Student MoE Model
+- **Cell 090 (Markdown):** ## Together Training
+- **Cell 091 (Code):** Run SHAP feature-importance analysis - Loads the libraries used by the following cells.
+- **Cell 092 (Markdown):** ## No Hand
+- **Cell 093 (Code):** Run SHAP feature-importance analysis - Loads the libraries used by the following cells.
+- **Cell 094 (Markdown):** ## eye+head+upper face au
+- **Cell 095 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 096 (Markdown):** ## Seperate Training
+- **Cell 097 (Code):** Run SHAP feature-importance analysis - Loads the libraries used by the following cells.
+- **Cell 098 (Markdown):** ## Common Things
+- **Cell 099 (Code):** TCN expert blocks - Runs a supporting step for part 3: student moe baseline.
+- **Cell 100 (Markdown):** # Class Weight
+- **Cell 101 (Markdown):** ## Together Training
+- **Cell 102 (Markdown):** ## Normal Class Weight
+- **Cell 103 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 104 (Markdown):** ## Sqr Root Class Weight
+- **Cell 105 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 106 (Markdown):** ## Seperate Training
+- **Cell 107 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 108 (Markdown):** ## 13. Train
+- **Cell 109 (Markdown):** ## Together Training
+- **Cell 110 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 111 (Markdown):** ## Seperate Training
+- **Cell 112 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 113 (Markdown):** ## 14. Evaluate
+- **Cell 114 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 115 (Markdown):** ## Together Training
+- **Cell 116 (Code):** Final evaluation — all 10 participants individually - Runs a supporting step for part 3: student moe baseline.
+- **Cell 117 (Markdown):** ## No hand
+- **Cell 118 (Code):** Final evaluation — all 10 participants individually - Runs a supporting step for part 3: student moe baseline.
+- **Cell 119 (Markdown):** ## eye+head+upper face au
+- **Cell 120 (Code):** Final evaluation — all 10 participants individually - Runs a supporting step for part 3: student moe baseline.
+- **Cell 121 (Code):** Final evaluation — all 10 participants individually - Runs a supporting step for part 3: student moe baseline.
+- **Cell 122 (Markdown):** ----------------
+- **Cell 123 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 124 (Markdown):** ## Seperate Training
+- **Cell 125 (Code):** Final evaluation: participants are evaluated separately within each domain-speci - Computes metrics used to compare model variants.
+- **Cell 126 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 127 (Markdown):** # Save the Results
+- **Cell 128 (Markdown):** ## Together Training
+- **Cell 129 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 130 (Code):** Save results and metadata - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 131 (Markdown):** ## Seperate Training
+- **Cell 132 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 133 (Code):** Save results and metadata - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 134 (Markdown):** ## Overfit Sanity Check
+- **Cell 135 (Markdown):** # Overfit sanity check for current student MoE
+- **Cell 136 (Code):** Overfit sanity check for current student MoE - Runs a supporting step for part 3: student moe baseline.
+- **Cell 137 (Code):** Run part 3 code - Runs a supporting step for part 3: student moe baseline.
+- **Cell 138 (Code):** Train model and store history - Fits the selected model on the prepared training arrays and validates it.
+
+## Part 4: RQ2 Teacher-Student Distillation
+
+- **Cell 139 (Markdown):** ## RQ2 Distillation
+- **Cell 140 (Markdown):** Before starting RQ2, run the earlier notebook sections that prepare the shared data and variables. You do not need to...
+- **Cell 141 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 142 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 143 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 144 (Markdown):** ## Step 1: Rebuild Aligned Student and Teacher Windows This step creates matching student and teacher windows from th...
+- **Cell 145 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 146 (Markdown):** ## No Hand
+- **Cell 147 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 148 (Markdown):** ## eye+head+upper face au
+- **Cell 149 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 150 (Markdown):** ## Step 2: Load or Create Teacher Soft Labels This step uses cached teacher probabilities when they match the current...
+- **Cell 151 (Code):** Define loading helper `soften_probabilities` - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 152 (Markdown):** ## Step 2b: Sanity Check Teacher Soft Labels Before training any student, verify that teacher soft labels line up wit...
+- **Cell 153 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 154 (Markdown):** ## Step 2c: Diagnose Teacher Output Column Mapping This checks whether teacher soft-label columns are in a different ...
+- **Cell 155 (Code):** mapping[pred_column] = hard_label_index - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 156 (Markdown):** ## Step 3: Shared Losses, Metrics, and Building Blocks These helpers are used by all three distillation processes.
+- **Cell 157 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 158 (Markdown):** ## Distillation Process 1: Flat Fusion Goal: test the simplest student baseline. Eye, head, and hand are concatenated...
+- **Cell 159 (Markdown):** ### Process 1 Step 1: Build the Flat Fusion Student
+- **Cell 160 (Code):** Define model builder `build_flat_fusion_model` - Defines reusable model components without training them yet.
+- **Cell 161 (Markdown):** ### Process 1 Step 2: Train and Validate Flat Fusion
+- **Cell 162 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 163 (Code):** Train model and store history - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 164 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 165 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 166 (Code):** Import required libraries - Loads the libraries used by the following cells.
+- **Cell 167 (Markdown):** Two bugs combined to produce the bad result. Here's what each one did: Bug 2 (double-softening): With TEACHER_TEMPERA...
+- **Cell 168 (Markdown):** ## Distillation Process 2: Coarse Domain MoE
+- **Cell 169 (Markdown):** Goal: Builds a student with separate eye/head/hand experts and a coarse domain-level gate. It trains across distillat...
+- **Cell 170 (Code):** Prepare `flat_dir` - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 171 (Markdown):** ## Process 2 Step 1: Build the Coarse Domain MoE Student
+- **Cell 172 (Code):** Define model builder `build_coarse_domain_moe_model` - Defines reusable model components without training them yet.
+- **Cell 173 (Markdown):** ### Process 2 Step 2: Train Coarse Domain MoE Across Loss Weights
+- **Cell 174 (Markdown):** The validation participant selects the best soft/hard loss weighting by macro-F1.
+- **Cell 175 (Code):** RQ2 per-sample class weights (used by Coarse MoE and EMOE training) - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 176 (Code):** Train model and store history - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 177 (Markdown):** ## No Hand
+- **Cell 178 (Code):** Train model and store history - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 179 (Markdown):** ## eye+head+upper face au
+- **Cell 180 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 181 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 182 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 183 (Code):** Import required libraries - Loads the libraries used by the following cells.
+- **Cell 184 (Markdown):** The headline contradiction: val accuracy went down (0.340 → 0.271) but macro F1 went up (0.163 → 0.187). These are no...
+- **Cell 185 (Markdown):** # Distillation Process 3: EMOE with Unimodal Distillation Goal: Separate TCN experts for each modality (eye, head, ha...
+- **Cell 186 (Markdown):** ## Load Process 2 baseline
+- **Cell 187 (Code):** Prepare `coarse_dir` - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 188 (Markdown):** ## Build EMOE model:
+- **Cell 189 (Code):** Modality-specific experts - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 190 (Markdown):** ### No Hand
+- **Cell 191 (Code):** hand_input = layers.Input(shape=(SEQ_LENGTH, len(HAND_COLS)), name="hand_input") - Estimates which features contribute most to model predictions.
+- **Cell 192 (Markdown):** ## eye+head+upper face au
+- **Cell 193 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 194 (Markdown):** ## Train and save
+- **Cell 195 (Code):** Train model and store history - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 196 (Markdown):** ### No Hand
+- **Cell 197 (Code):** Train model and store history - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 198 (Markdown):** ## eye+head+upper face au
+- **Cell 199 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 200 (Markdown):** ## Diagnostic
+- **Cell 201 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 202 (Markdown):** ### No Hand
+- **Cell 203 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 204 (Markdown):** ## eye+head+upper face au
+- **Cell 205 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 206 (Markdown):** ## Save Extra Metrics
+- **Cell 207 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 208 (Code):** Save results and metadata - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 209 (Markdown):** ## Test evaluation Function + Model Loading
+- **Cell 210 (Code):** Test set evaluation — all three processes - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 211 (Markdown):** ## Test 3 Process
+- **Cell 212 (Code):** Prepare `flat_test_metrics,   flat_test_pred` - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 213 (Markdown):** ### No Hand
+- **Cell 214 (Code):** Prepare `flat_test_metrics,   flat_test_pred` - Runs a supporting step for part 4: rq2 teacher-student distillation.
+- **Cell 215 (Markdown):** ## eye+head+upper face au
+- **Cell 216 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 217 (Code):** Import required libraries - Loads the libraries used by the following cells.
+
+## Part 5: Ablation, Per-Emotion Gaps, and SHAP
+
+- **Cell 218 (Markdown):** # Phase 2 — Step 7: Per-Modality Leave-One-Out Ablation (RQ2) This section evaluates whether EMOE preserved each moda...
+- **Cell 219 (Markdown):** ## Ablation Helper Functions
+- **Cell 220 (Code):** ── Per-modality leave-one-out ablation ────────────────────────────────────── - Measures how performance changes when one modality is removed.
+- **Cell 221 (Markdown):** ## Run Ablation
+- **Cell 222 (Code):** P1 — Flat Fusion - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 223 (Code):** Phase 3 — Step 8: Modality Ablation (no_hand run) - Measures how performance changes when one modality is removed.
+- **Cell 224 (Markdown):** ## Build Summary
+- **Cell 225 (Code):** Build summary DataFrame - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 226 (Markdown):** # Phase 3 — Step 8: Per-Emotion F1 Report and Distillation Gap Table ---
+- **Cell 227 (Markdown):** ## Paths
+- **Cell 228 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 229 (Markdown):** ## Load Models
+- **Cell 230 (Code):** Before run this, run all the build cells - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 231 (Markdown):** ## Load Teacher Soft Labels
+- **Cell 232 (Code):** Phase 3 — Step 8: Load Teacher Soft Labels - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 233 (Markdown):** ## eye+head+upper face au
+- **Cell 234 (Code):** Phase 3 — Step 8: Load Teacher Soft Labels - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 235 (Markdown):** ## Evaluate All Models on Test Set
+- **Cell 236 (Code):** Phase 3 — Step 8: Evaluate All Models on Test Set - Computes metrics used to compare model variants.
+- **Cell 237 (Markdown):** ## eye+head+upper face au
+- **Cell 238 (Code):** Phase 3 — Step 8: Evaluate All Models on Test Set - Computes metrics used to compare model variants.
+- **Cell 239 (Markdown):** ## Build the per-emotion F1 table with distillation gap
+- **Cell 240 (Code):** Prepare `teacher_test_pred` - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 241 (Code):** Per-Emotion F1 Table — All Models vs. Teacher - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 242 (Markdown):** ## Print the paper-ready summary in plain text
+- **Cell 243 (Code):** Paper-Ready Summary — Distillation Gap Narrative - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 244 (Markdown):** ## Save it in Drive
+- **Cell 245 (Code):** Save Full Run Metadata to Drive - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 246 (Code):** Update metadata with ablation results - Measures how performance changes when one modality is removed.
+- **Cell 247 (Markdown):** # Phase 3 — Step 9: SHAP-based Information Budget Decomposition
+- **Cell 248 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 249 (Code):** Run SHAP feature-importance analysis - Loads the libraries used by the following cells.
+- **Cell 250 (Code):** Goal: For each emotion where Teacher−EMOE gap is large, - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 251 (Code):** Run SHAP GradientExplainer - Estimates which features contribute most to model predictions.
+- **Cell 252 (Code):** AU classification — correlate vs no-correlate - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 253 (Code):** Prepare `NO_CORRELATE_AUS` - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 254 (Code):** shap_values shape: (936, 5, 60, 7) - Estimates which features contribute most to model predictions.
+- **Cell 255 (Code):** Per-emotion gap analysis - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 256 (Code):** Run SHAP feature-importance analysis - Loads the libraries used by the following cells.
+- **Cell 257 (Code):** Bar chart — top AUs per emotion - Runs a supporting step for part 5: ablation, per-emotion gaps, and shap.
+- **Cell 258 (Code):** Save Step 9 outputs - Writes results to Drive so they can be reused in later analysis or the paper.
+
+## Part 6: RQ4 Modality Importance
+
+- **Cell 259 (Markdown):** ## RQ4 Modality Importance
+- **Cell 260 (Code):** EarlyStopping restore_best_weights=True olduğu için - Runs a supporting step for part 6: rq4 modality importance.
+- **Cell 261 (Markdown):** ## train the reference student
+- **Cell 262 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 263 (Markdown):** ## SHAP GradientExplainer (per-channel + per-modality) It says how every signal important
+- **Cell 264 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 265 (Code):** Use the freshly trained in-memory model - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 266 (Markdown):** ## Pareto Which signal combination yields what level of accuracy at what cost?
+- **Cell 267 (Code):** Use the freshly trained in-memory model - Fits the selected model on the prepared training arrays and validates it.
+- **Cell 268 (Code):** Signal-cost model - Runs a supporting step for part 6: rq4 modality importance.
+
+## Part 7: Confound and Sanity Checks
+
+- **Cell 269 (Markdown):** ## Stimulus-Position Proxy Audit
+- **Cell 270 (Markdown):** It checks whether emotion labels are systematically associated with gaze/head direction, which would suggest the eye ...
+- **Cell 271 (Code):** Stimulus-position proxy audit - Checks whether gaze/head direction may reflect stimulus-position artifacts.
+- **Cell 272 (Markdown):** ## Helper Functions
+- **Cell 273 (Code):** Configure student-signal thresholding - Controls whether low-signal student windows are filtered before training.
+- **Cell 274 (Markdown):** ## Recordings
+- **Cell 275 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 276 (Markdown):** ## Summarize Each Recording
+- **Cell 277 (Markdown):** For every participant/emotion/source recording, it computes: mean, median, standard deviation, IQR
+- **Cell 278 (Code):** Run pitch confound analysis - Checks whether pitch-related patterns may explain part of the emotion signal.
+- **Cell 279 (Markdown):** ## Emotion-by-Source Summary
+- **Cell 280 (Code):** Run pitch confound analysis - Checks whether pitch-related patterns may explain part of the emotion signal.
+- **Cell 281 (Markdown):** ## Dominant Direction Bins
+- **Cell 282 (Markdown):** Do most of the recordings for each emotion point in the same direction?
+- **Cell 283 (Markdown):** If 70% or more of recordings for an emotion/source point in the same bin, it flags
+- **Cell 284 (Code):** Configure student-signal thresholding - Controls whether low-signal student windows are filtered before training.
+- **Cell 285 (Markdown):** ## Range Flags and Interpretation
+- **Cell 286 (Markdown):** How much does the average yaw/pitch change between emotions?
+- **Cell 287 (Markdown):** Flag rule: yaw_range >= 15 degrees OR pitch_range >= 10 degrees
+- **Cell 288 (Code):** Run pitch confound analysis - Checks whether pitch-related patterns may explain part of the emotion signal.
+- **Cell 289 (Markdown):** ## Save Outputs
+- **Cell 290 (Code):** Save results and metadata - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 291 (Code):** Import plotting libraries - Loads the libraries used by the following cells.
+- **Cell 292 (Markdown):** # Cross-Source Generalization Test (Eye-Only) We want to test whether EYE_COLS contain emotion signal that generalize...
+- **Cell 293 (Markdown):** 1. Setup Defines output folder, seed, batch size, epochs, and confirms EYE_COLS. 2. Collect recordings Scans: ActingR...
+- **Cell 294 (Code):** Cross-source eye-only generalization test - Tests whether eye-only emotion signals generalize across recording sources.
+- **Cell 295 (Code):** Define data and output paths - Sets the folder locations used for input data, trained models, predictions, and saved reports.
+- **Cell 296 (Code):** Create participant-exclusive splits - Keeps participant identities separated across train, validation, and test sets.
+- **Cell 297 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 298 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 299 (Code):** Define model builder `build_eye_only_model` - Defines reusable model components without training them yet.
+- **Cell 300 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 301 (Code):** Evaluate model performance - Computes metrics used to compare model variants.
+- **Cell 302 (Code):** Run cross-source eye-only analysis - Tests whether eye-only emotion signals generalize across recording sources.
+- **Cell 303 (Markdown):** The cross-source eye-only generalization test showed asymmetric generalization. Eye-only models trained on video achi...
+- **Cell 304 (Markdown):** # Pitch Confound Probe — Sanity Check
+- **Cell 305 (Markdown):** Is the pitch difference between emotions a genuine relative perceptual phenomenon, or is it simply that some recordin...
+- **Cell 306 (Code):** SANITY CHECK: - Runs a supporting step for part 7: confound and sanity checks.
+- **Cell 307 (Markdown):** std_pitch = It shows how much the average pitch values ​​of different windows differ from one another. mean_within_wi...
+- **Cell 308 (Code):** FOLLOW-UP CHECK: does within-window pitch VARIANCE differ by emotion? - Creates fixed-length temporal examples from each recording.
+- **Cell 309 (Code):** SAVE: Sanity-check results (pitch mean/variance vs. emotion) - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 310 (Markdown):** We might have previously observed an emotion-related difference in raw pitch values. However, that difference largely...
+- **Cell 311 (Markdown):** Why does Happiness look different? Happiness: mean = 0.076 std = 1.170 Other emotions: mean = 0.034 std = 0.674 The d...
+- **Cell 312 (Markdown):** Final decision This sanity check indicates the following: Raw pitch emotion difference ↓ Normalization ↓ Difference d...
+- **Cell 313 (Markdown):** ## Five-Case Pitch Confound Probe
+- **Cell 314 (Markdown):** After the sanity check, we learned the following: There is **no difference in the average normalized pitch across emo...
+- **Cell 315 (Markdown):** Note: In all cases, we only varied the EyeGazePitch. The head, AU, and other eye features remained unchanged.
+- **Cell 316 (Markdown):** ## The five perturbation cases Each case modifies only the `EyeGazePitch` channel (index 6 of `EYE_COLS`) for a subse...
+- **Cell 317 (Markdown):** Prerequisite: best_emoe["model"], X_eye_test/train, X_head_test, X_upper_au_test, Yemo_test/train, le, and PITCH_IDX ...
+- **Cell 318 (Markdown):** ## Setup+ train-only targets
+- **Cell 319 (Code):** Import machine-learning metrics and utilities - Loads the libraries used by the following cells.
+- **Cell 320 (Markdown):** ## Perturbation Functions
+- **Cell 321 (Code):** Define eye feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 322 (Markdown):** ## Statistical Tools
+- **Cell 323 (Code):** Define upper-face AU feature columns - Defines which sensor columns are used as model inputs.
+- **Cell 324 (Markdown):** ## Run all 5 cases
+- **Cell 325 (Code):** Load EMOE (eye+head+upperAU) model weights from Drive - Runs a supporting step for part 7: confound and sanity checks.
+- **Cell 326 (Code):** Baseline - Runs a supporting step for part 7: confound and sanity checks.
+- **Cell 327 (Code):** Save results and metadata - Writes results to Drive so they can be reused in later analysis or the paper.
+- **Cell 328 (Markdown):** ## Results and interpretation | Case | Accuracy | Macro F1 | Flip rate → Happiness | Notes | |---|---|---|---|---| | ...
+- **Cell 329 (Code):** Run part 7 code - Runs a supporting step for part 7: confound and sanity checks.

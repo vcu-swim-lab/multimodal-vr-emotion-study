@@ -1,0 +1,2010 @@
+
+### RUN 6train_2val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: teacher_window, no_abs, 6train_2val_2test
+- score 4.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 4.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 83
+    #epochs = 30
+    #batch_size = 10
+    #   input_shape=(SEQ_LENGTH, input_size),
+    epochs = 60
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=10,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "student_eye_head_hand_q3_teacher_windows_noabs_adam_noreg_classweight_7train1val2test-window_stride_2.best.keras",
+    monitor="val_accuracy",
+    epochs=epochs,
+    batch_size=batch_size,
+    class_weight=class_weight,
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 82
+    #epochs = 30
+    #batch_size = 10
+    #   input_shape=(SEQ_LENGTH, input_size),
+    epochs = 60
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=10,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "student_eye_head_hand_q3_teacher_windows_noabs_adam_noreg_classweight_7train1val2test.best.keras",
+    monitor="val_accuracy",
+    epochs=epochs,
+    batch_size=batch_size,
+    class_weight=class_weight,
+- score 2.0: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.0: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+
+### RUN 7train_1val_2test_student-no_hand-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: teacher_window, no_abs, no_hand, 7train_1val_2test
+- score 6.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.6: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.2: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.2: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 83
+    #epochs = 30
+    #batch_size = 10
+    #   input_shape=(SEQ_LENGTH, input_size),
+    epochs = 60
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=10,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "student_eye_head_hand_q3_teacher_windows_noabs_adam_noreg_classweight_7train1val2test-window_stride_2.best.keras",
+    monitor="val_accuracy",
+    epochs=epochs,
+    batch_size=batch_size,
+    class_weight=class_weight,
+- score 3.2: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 82
+    #epochs = 30
+    #batch_size = 10
+    #   input_shape=(SEQ_LENGTH, input_size),
+    epochs = 60
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=10,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "student_eye_head_hand_q3_teacher_windows_noabs_adam_noreg_classweight_7train1val2test.best.keras",
+    monitor="val_accuracy",
+    epochs=epochs,
+    batch_size=batch_size,
+    class_weight=class_weight,
+- score 3.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+
+### RUN 7train_1val_2test_student-same_hyperparameters_and_same_window_size_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: 0.25, same_hyperparameters, same_window_size, 7train_1val_2test
+- score 6.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 6.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 84
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 81
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN 7train_1val_2test_student-same_hyperparameters_and_same_window_size_with_teacher-normalized_but_no_abs-0.25-threshold-class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: no_abs, 0.25, same_hyperparameters, same_window_size, 7train_1val_2test
+- score 6.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 6.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 4.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 4.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 84
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 81
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN 7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: 0.25, same_hyperparameters, 7train_1val_2test
+- score 5.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 5.8: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 5.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 5.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.2: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.2: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.2: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.2: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN 7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-monitor_val_loss-patience_6-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: monitor_val_loss, 0.25, same_hyperparameters, 7train_1val_2test
+- score 6.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 6.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 4.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 4.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.0: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 84
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.0: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 81
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN 7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-no_class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: 0.25, same_hyperparameters, 7train_1val_2test
+- score 6.2: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.2: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 6.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN 7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-sqr_root_class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: 0.25, same_hyperparameters, sqr_root, 7train_1val_2test
+- score 6.2: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.2: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 6.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 109
+    RQ2_BATCH_SIZE = 10
+    {"soft": 1.0, "hard": 0.25, "unimodal": 0.10},
+    {"soft": 1.0, "hard": 0.50, "unimodal": 0.25},
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+
+### RUN 7train_1val_2test_student-same_hyperparameters_with_teacher_but_batch16-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: batch16, 0.25, same_hyperparameters, 7train_1val_2test
+- score 6.2: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.2: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 6.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 6.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN 7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together
+EXACT MATCHES
+- student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+
+### RUN 7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-no_class_weight-MoE_3experts_2gate_together
+NO EXACT MATCH. Signature search: teacher_window, no_abs, 7train_1val_2test
+- score 5.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 96
+    run_name = "7train_1val_2test_student-teacher_window-window_stride_2-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 5.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 95
+    run_name = "7train_1val_2test_student-teacher_window-no_abs_in_normalization-no_gate_reg-adam-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.4: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.4: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 3.2: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.2: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 83
+    #epochs = 30
+    #batch_size = 10
+    #   input_shape=(SEQ_LENGTH, input_size),
+    epochs = 60
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=10,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "student_eye_head_hand_q3_teacher_windows_noabs_adam_noreg_classweight_7train1val2test-window_stride_2.best.keras",
+    monitor="val_accuracy",
+    epochs=epochs,
+    batch_size=batch_size,
+    class_weight=class_weight,
+- score 3.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 82
+    #epochs = 30
+    #batch_size = 10
+    #   input_shape=(SEQ_LENGTH, input_size),
+    epochs = 60
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=1e-3),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=10,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "student_eye_head_hand_q3_teacher_windows_noabs_adam_noreg_classweight_7train1val2test.best.keras",
+    monitor="val_accuracy",
+    epochs=epochs,
+    batch_size=batch_size,
+    class_weight=class_weight,
+
+### RUN no_eyeGazePitch_Roll_OriginX_headPitch_Roll_student_teacher_style_moe_0.25_threshold_with_class_weight_normalized_per_recording
+NO EXACT MATCH. Signature search: normalized_per_recording, 0.25
+- score 4.0: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 95
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 3.4: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 84
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 81
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+
+### RUN separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording
+EXACT MATCHES
+- student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 95
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+
+### RUN student_teacher_style_moe_0.1_threshold_no_class_weight
+NO EXACT MATCH. Signature search: 0.1
+
+### RUN student_teacher_style_moe_0.25_threshold_except_neutral_with_class_weight_global_norm
+NO EXACT MATCH. Signature search: global_norm, except_neutral, 0.25
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.8: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 95
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 143
+    Best weights were soft=1.0, hard=0.25 — the lightest hard label penalty won. This means the teacher's soft distribution is carrying more useful signal than the hard ground-truth labels, which makes sense given the teacher's own val accuracy is only 0
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 56
+    print("Student threshold used for window selection:", STUDENT_THRESHOLD)
+    print("Threshold columns used:", STUDENT_THRESHOLD_COLS)
+    print("Student input shapes after student-signal thresholding")
+    assert X_eye_train.shape[1:] == (SEQ_LENGTH, len(EYE_COLS))
+    assert X_head_train.shape[1:] == (SEQ_LENGTH, len(HEAD_COLS))
+    assert X_hand_train.shape[1:] == (SEQ_LENGTH, len(HAND_COLS))
+    print("Review passed: student uses eye/head/hand only, with teacher-style scan logic and threshold=0.25.")
+
+### RUN student_teacher_style_moe_0.25_threshold_with_class_weight
+NO EXACT MATCH. Signature search: 0.25
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 95
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.4: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.4: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 56
+    print("Student threshold used for window selection:", STUDENT_THRESHOLD)
+    print("Threshold columns used:", STUDENT_THRESHOLD_COLS)
+    print("Student input shapes after student-signal thresholding")
+    assert X_eye_train.shape[1:] == (SEQ_LENGTH, len(EYE_COLS))
+    assert X_head_train.shape[1:] == (SEQ_LENGTH, len(HEAD_COLS))
+    assert X_hand_train.shape[1:] == (SEQ_LENGTH, len(HAND_COLS))
+    print("Review passed: student uses eye/head/hand only, with teacher-style scan logic and threshold=0.25.")
+- score 2.2: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 41
+    print("Student threshold used for window selection:", STUDENT_THRESHOLD)
+    print("Threshold columns used:", STUDENT_THRESHOLD_COLS)
+    print("Student input shapes after student-signal thresholding")
+    assert X_eye_train.shape[1:] == (SEQ_LENGTH, len(EYE_COLS))
+    assert X_head_train.shape[1:] == (SEQ_LENGTH, len(HEAD_COLS))
+    assert X_hand_train.shape[1:] == (SEQ_LENGTH, len(HAND_COLS))
+    print("Review passed: student uses eye/head/hand only, with teacher-style scan logic and threshold=0.25.")
+- score 2.2: student_MoE_eye_head_hand_10participants_top2_moe_reviewed.ipynb cell 29
+    print("Student threshold used for window selection:", STUDENT_THRESHOLD)
+    print("Threshold columns used:", STUDENT_THRESHOLD_COLS)
+    print("Student input shapes after student-signal thresholding")
+    assert X_eye_train.shape[1:] == (SEQ_LENGTH, len(EYE_COLS))
+    assert X_head_train.shape[1:] == (SEQ_LENGTH, len(HEAD_COLS))
+    assert X_hand_train.shape[1:] == (SEQ_LENGTH, len(HAND_COLS))
+    print("Review passed: student uses eye/head/hand only, with teacher-style scan logic and threshold=0.25.")
+
+### RUN student_teacher_style_moe_0.25_threshold_with_class_weight_global_norm
+NO EXACT MATCH. Signature search: global_norm, 0.25
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.8: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 95
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.6: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 79
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.2: student_teacher_matched_experimental_setup.ipynb cell 56
+    print("Student threshold used for window selection:", STUDENT_THRESHOLD)
+    print("Threshold columns used:", STUDENT_THRESHOLD_COLS)
+    print("Student input shapes after student-signal thresholding")
+    assert X_eye_train.shape[1:] == (SEQ_LENGTH, len(EYE_COLS))
+    assert X_head_train.shape[1:] == (SEQ_LENGTH, len(HEAD_COLS))
+    assert X_hand_train.shape[1:] == (SEQ_LENGTH, len(HAND_COLS))
+    print("Review passed: student uses eye/head/hand only, with teacher-style scan logic and threshold=0.25.")
+- score 2.2: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 41
+    print("Student threshold used for window selection:", STUDENT_THRESHOLD)
+    print("Threshold columns used:", STUDENT_THRESHOLD_COLS)
+    print("Student input shapes after student-signal thresholding")
+    assert X_eye_train.shape[1:] == (SEQ_LENGTH, len(EYE_COLS))
+    assert X_head_train.shape[1:] == (SEQ_LENGTH, len(HEAD_COLS))
+    assert X_hand_train.shape[1:] == (SEQ_LENGTH, len(HAND_COLS))
+    print("Review passed: student uses eye/head/hand only, with teacher-style scan logic and threshold=0.25.")
+
+### RUN student_teacher_style_moe_0.25_threshold_with_class_weight_normalized_per_recording_9train_1test
+NO EXACT MATCH. Signature search: normalized_per_recording, 0.25, 9train_1test
+- score 4.0: student_teacher_matched_experimental_setup.ipynb cell 96
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_video_acting_separate.ipynb cell 56
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 99
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 98
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 4.0: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 95
+    base_run_name = "separate_video_acting_student_moe_0.25_threshold_with_class_weight_normalized_per_recording"
+    base_run_path = output_path / "student_results" / base_run_name
+    "run_name": base_run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(USE_CLASS_WEIGHT),
+- score 3.4: student_teacher_matched_experimental_setup.ipynb cell 82
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_reduced_emoe_capacity.ipynb cell 85
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_and_rq2_distillation_continued.ipynb cell 84
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 3.4: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 81
+    input_shape=(SEQ_LENGTH, input_size),
+    early_stop = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint_path = models_path / f"normalized_per_recordings_student_moe_{domain_name}_0.25_threshold_class_weight.best.keras"
+    checkpoint = callbacks.ModelCheckpoint(
+    monitor="val_accuracy",
+    if domain_class_weights[domain_name] is not None:
+    fit_kwargs["class_weight"] = domain_class_weights[domain_name]
+    epochs=epochs,
+    batch_size=batch_size,
+- score 2.8: student_teacher_matched_experimental_setup.ipynb cell 93
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.8: student_MoE_eye_head_hand_10participants_17_with_rq2.ipynb cell 92
+    run_name = "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together"
+    run_path = output_path / "student_results" / run_name
+    "run_name": run_name,
+    "threshold_used": bool(USE_STUDENT_THRESHOLD),
+    "student_threshold": float(STUDENT_THRESHOLD),
+    "class_weight_used": bool(class_weight is not None),
+    "class_weight": None if class_weight is None else {
+    int(k): float(v) for k, v in class_weight.items()
+    "seq_length": int(SEQ_LENGTH),
+    "epochs": int(epochs),
+    "batch_size": int(batch_size),
+    "early_stopping_monitor": es_cb.monitor,
+    "early_stopping_patience": int(es_cb.patience),
+- score 2.6: student_teacher_matched_experimental_setup.ipynb cell 80
+    epochs = 30
+    batch_size = 10
+    input_shape=(SEQ_LENGTH, input_size),
+    es_cb = callbacks.EarlyStopping(
+    monitor="val_accuracy",
+    patience=8,
+    checkpoint = callbacks.ModelCheckpoint(
+    models_path / "7train_1val_2test_student-same_hyperparameters_with_teacher-normalized-0.25-threshold-class_weight-MoE_3experts_2gate_together.best.keras",
+    monitor="val_accuracy",
+    if class_weight is not None:
+    fit_kwargs["class_weight"] = class_weight
+    epochs=epochs,
+    batch_size=batch_size,
+
+### RUN student_teacher_style_moe_no_threshold_no_class_weight
+NO EXACT MATCH. Signature search: no_threshold
+
+### RUN student_teacher_style_moe_no_threshold_with_class_weight
+NO EXACT MATCH. Signature search: no_threshold

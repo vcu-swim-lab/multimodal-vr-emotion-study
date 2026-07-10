@@ -14,3 +14,5 @@ analysis_output/
 *.log
 FormResponses/*
 !FormResponses/.gitkeep
+analysis_output/*
+!analysis_output/.gitkeep
